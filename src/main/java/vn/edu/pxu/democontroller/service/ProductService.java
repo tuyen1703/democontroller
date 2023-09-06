@@ -1,12 +1,11 @@
-package pxu.com.service;
+package vn.edu.pxu.democontroller.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import pxu.com.model.Product;
+import vn.edu.pxu.democontroller.model.Product;
 
-@Service
 public interface ProductService {
 	List<Product> fimAll();
 	Product finByid(int id);

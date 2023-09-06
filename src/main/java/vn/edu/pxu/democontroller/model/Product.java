@@ -1,4 +1,4 @@
-package pxu.com.model;
+package vn.edu.pxu.democontroller.model;
 
 public class Product {
 	private int code;

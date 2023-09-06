@@ -1,4 +1,4 @@
-package pxu.com.controller;
+package vn.edu.pxu.democontroller.controller;
 
 import java.util.List;
 
@@ -7,16 +7,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import pxu.com.model.Product;
-import pxu.com.service.ProductService;
+import vn.edu.pxu.democontroller.model.Product;
+import vn.edu.pxu.democontroller.service.ProductService;
 
 @Controller
 public class ProductController {
 	@Autowired
 	public ProductService productService;
+
+	@RequestMapping(value = "product/add", method = RequestMethod.GET)
+	public String processAddProductForm(@ModelAttribute("product") Product product) {
+		return "product/home";
+	}
 
 	@GetMapping("/products")
 	public ModelAndView list() {

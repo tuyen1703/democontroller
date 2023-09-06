@@ -1,4 +1,4 @@
-package pxu.com.config;
+package vn.edu.pxu.democontroller.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

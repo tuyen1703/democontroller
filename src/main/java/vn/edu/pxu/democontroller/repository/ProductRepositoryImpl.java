@@ -1,11 +1,11 @@
-package pxu.com.repository;
+package vn.edu.pxu.democontroller.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import pxu.com.model.Product;
+import vn.edu.pxu.democontroller.model.Product;
 
 public class ProductRepositoryImpl implements ProductRepository {
 

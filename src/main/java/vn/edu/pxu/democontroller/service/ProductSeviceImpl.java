@@ -1,32 +1,33 @@
-package pxu.com.service;
+package vn.edu.pxu.democontroller.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pxu.com.model.Product;
+import vn.edu.pxu.democontroller.model.Product;
+import vn.edu.pxu.democontroller.repository.ProductRepository;
 
 public class ProductSeviceImpl implements ProductService {
 
 	@Autowired
-	public ProductService productService;
+	public ProductRepository productRepository;
 
 	@Override
 	public List<Product> fimAll() {
 		// TODO Auto-generated method stub
-		return this.productService.fimAll();
+		return this.productRepository.fimAll();
 	}
 
 	@Override
 	public Product finByid(int id) {
 		// TODO Auto-generated method stub
-		return this.productService.finByid(id);
+		return this.productRepository.finByid(id);
 	}
 
 	@Override
 	public void save(Product product) {
 		// TODO Auto-generated method stub
-		this.productService.save(product);
+		this.productRepository.save(product);
 	}
 
 }
