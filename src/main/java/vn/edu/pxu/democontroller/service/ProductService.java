@@ -7,7 +7,11 @@ import org.springframework.stereotype.Component;
 import vn.edu.pxu.democontroller.model.Product;
 
 public interface ProductService {
-	List<Product> fimAll();
-	Product finByid(int id);
+	List<Product> findAll();
+	Product finById(int id);
 	void save(Product product);
+
+	void update(Product product); 
+
+	void delete(int code);
 }

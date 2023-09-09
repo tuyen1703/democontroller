@@ -4,61 +4,68 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import vn.edu.pxu.democontroller.model.Product;
 import vn.edu.pxu.democontroller.service.ProductService;
+
 
 @Controller
 public class ProductController {
 	@Autowired
 	public ProductService productService;
 
-	@RequestMapping(value = "product/add", method = RequestMethod.GET)
+//	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping("/add")
 	public String processAddProductForm(@ModelAttribute("product") Product product) {
-		return "product/home";
+		return "/home";
 	}
 
 	@GetMapping("/products")
-	public ModelAndView list() {
-		List<Product> products = this.productService.fimAll();
-		ModelAndView modelAndView = new ModelAndView("product/list");
-		modelAndView.addObject("products", products);
-		return modelAndView;
+	public String list(Model model) {
+		List<Product> products = this.productService.findAll();
+		model.addAttribute("products", products);
+		return "list";
 	}
 
-	@GetMapping("/new")
-	public ModelAndView showCreateform() {
-		ModelAndView modelAndView = new ModelAndView("product/create");
-		modelAndView.addObject("product", new Product());
-		return modelAndView;
-	}
-
-	@PostMapping("/new")
-	public ModelAndView createProduct(@ModelAttribute("product") Product product) {
+	@PostMapping("/save")
+	public String saveProduct(@ModelAttribute("product") Product product) {
 		int romdomid = (int) (Math.random() * 1000);
 		product.setCode(romdomid);
 		this.productService.save(product);
+		return "redirect:/products";
+	}
 
-		ModelAndView modelAndView = new ModelAndView("product/create");
-		modelAndView.addObject("product", new Product());
-		modelAndView.addObject("mess", "new product wwas created");
+	@GetMapping(value = "/update")
+	public String update(@RequestParam("code") Integer productid, Model model) {
+		Product product = this.productService.finById(productid);
+		model.addAttribute("product", product);
+		return "update";
 
-		return modelAndView;
 	}
 
 	@GetMapping(value = "/view")
-	public ModelAndView view(@RequestParam("id") Integer productid) {
-		Product product = this.productService.finByid(productid);
-		ModelAndView modelAndView = new ModelAndView("product/view");
-		modelAndView.addObject("product", product);
-		return modelAndView;
+	public String view(@RequestParam("code") Integer productid, Model model) {
+		Product product = this.productService.finById(productid);
+		model.addAttribute("product", product);
+		return "details";
 
+	}
+
+	@PostMapping("/edit")
+	public String updateProduct(@ModelAttribute("product") Product product) {
+		this.productService.update(product);
+		return "redirect:/products";
+	}
+
+	@GetMapping("/delete")
+	public String deleteProduct(@RequestParam("code") Integer productId) {
+		this.productService.delete(productId);
+		return "redirect:/products";
 	}
 }

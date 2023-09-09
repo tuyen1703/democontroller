@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 import vn.edu.pxu.democontroller.repository.ProductRepository;
 import vn.edu.pxu.democontroller.repository.ProductRepositoryImpl;
 import vn.edu.pxu.democontroller.service.ProductService;
-import vn.edu.pxu.democontroller.service.ProductSeviceImpl;
+import vn.edu.pxu.democontroller.service.ProductServiceImpl;
 
 @Configuration
 @EnableWebMvc
@@ -34,7 +34,7 @@ public class AppConfig implements WebMvcConfigurer {
 	}
 	@Bean
 	public ProductService productService() {
-		return new 	ProductSeviceImpl();
+		return new 	ProductServiceImpl();
 	}
 	
 	@Bean
